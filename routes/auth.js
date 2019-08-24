@@ -6,7 +6,7 @@ const User = require('../models/User');
 
 const router = express.Router();
 
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || 'Development secret';
 
 router.post('/signup', (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
@@ -54,6 +54,7 @@ router.post('/login', (req, res) => {
 
         jwt.sign(payload, secret, { expiresIn: 36000 }, (err, token) => {
           if (err) res.status(500).json({ error: 'Error signing token', raw: err });
+
           res.json({
             success: true,
             token: `Bearer ${token}`,
