@@ -2,38 +2,43 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema(
+const dishSchema = new Schema(
   {
-    email: {
+    name: {
       type: String,
       required: true,
-      unique: true,
     },
-    password: {
+    section: {
       type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    ingredients: [
+      {
+        type: String,
+      },
+    ],
+    menuId: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Menu',
       required: true,
     },
   },
   {
     timestamps: true,
     toJSON: {
-      virtuals: true,
       transform: (doc, ret) => {
         ret.id = doc._id;
         delete ret._id;
         delete ret.__v;
-        delete ret.password;
         return ret;
       },
     },
   }
 );
 
-userSchema.virtual('menus', {
-  ref: 'Menu',
-  localField: '_id',
-  foreignField: 'userId',
-});
-
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Dish = mongoose.model('Dish', dishSchema);
+module.exports = Dish;

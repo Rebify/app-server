@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema(
+const menuSchema = new Schema(
   {
-    email: {
+    name: {
       type: String,
       required: true,
-      unique: true,
     },
-    password: {
-      type: String,
+    userId: {
+      type: mongoose.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
   },
@@ -22,18 +22,17 @@ const userSchema = new Schema(
         ret.id = doc._id;
         delete ret._id;
         delete ret.__v;
-        delete ret.password;
         return ret;
       },
     },
   }
 );
 
-userSchema.virtual('menus', {
-  ref: 'Menu',
+menuSchema.virtual('dishes', {
+  ref: 'Dish',
   localField: '_id',
-  foreignField: 'userId',
+  foreignField: 'menuId',
 });
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Menu = mongoose.model('Menu', menuSchema);
+module.exports = Menu;

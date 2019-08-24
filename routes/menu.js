@@ -1,6 +1,7 @@
 import express from 'express';
 
 import User from '../models/User';
+import Menu from '../models/Menu';
 
 import { isAuthenticated } from '../middleware/authMiddleware';
 import { decodeToken } from '../utils/verifyToken';
@@ -12,8 +13,27 @@ router.get('/', isAuthenticated, (req, res) => {
   const { id } = decodeToken(token);
 
   User.findById(id)
+    .populate('menus')
     .then(user => {
-      console.log(user);
+      res.status(200).json({ user });
+    })
+    .catch(err => res.status(400).json(err));
+});
+
+router.post('/createMenu', isAuthenticated, (req, res, next) => {
+  const { authorization: token } = req.headers;
+  const { id } = decodeToken(token);
+
+  User.findById(id)
+    .then(() => {
+      const { name, dishes } = req.body;
+
+      const newMenu = new Menu({ name, dishes, userId: id });
+
+      newMenu
+        .save()
+        .then(() => res.status(201).json(newMenu))
+        .catch(next);
     })
     .catch(err => res.status(400).json(err));
 });
