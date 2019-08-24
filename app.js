@@ -1,6 +1,10 @@
+import * as express from 'express';
+import { createServer } from './config/http-config';
+
 require('dotenv').config();
+require('./config/db');
+
 const createError = require('http-errors');
-const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
@@ -35,4 +39,4 @@ app.use((err, req, res) => {
   res.render('error');
 });
 
-module.exports = app;
+createServer(app);
