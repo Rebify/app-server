@@ -8,6 +8,7 @@ import { createServer } from './config/http-config';
 
 import indexRouter from './routes/index';
 import authRouter from './routes/auth';
+import menuRouter from './routes/menu';
 
 require('dotenv').config();
 require('./config/db');
@@ -24,6 +25,7 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/menu', menuRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,12 +1,9 @@
-const express = require('express');
+import express from 'express';
 
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.status(200).json({
-    name: process.env.NAME || 'No name set',
-  });
+router.get('/ping', (req, res) => {
+  res.status(200).json({});
 });
 
-module.exports = router;
+export default router;

@@ -2,13 +2,10 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import { isAuthenticated } from '../middleware/authMiddleware';
-
-const User = require('../models/User');
+import User from '../models/User';
+import { secret } from '../utils/verifyToken';
 
 const router = express.Router();
-
-const secret = process.env.SECRET || 'Dev secret';
 
 router.post('/signup', (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
@@ -68,10 +65,6 @@ router.post('/login', (req, res) => {
       }
     });
   });
-});
-
-router.get('/sayHello', isAuthenticated, (req, res) => {
-  res.status(200).json({ message: 'hello' });
 });
 
 export default router;
