@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _config_http_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./config/http-config */ \"./config/http-config.js\");\n\n\n\n__webpack_require__(/*! dotenv */ \"dotenv\").config();\n\n__webpack_require__(/*! ./config/db */ \"./config/db.js\");\n\nvar createError = __webpack_require__(/*! http-errors */ \"http-errors\");\n\nvar cookieParser = __webpack_require__(/*! cookie-parser */ \"cookie-parser\");\n\nvar logger = __webpack_require__(/*! morgan */ \"morgan\");\n\nvar cors = __webpack_require__(/*! cors */ \"cors\");\n\nvar indexRouter = __webpack_require__(/*! ./routes/index */ \"./routes/index.js\");\n\nvar app = express__WEBPACK_IMPORTED_MODULE_0__();\napp.use(cors());\napp.use(logger('dev'));\napp.use(express__WEBPACK_IMPORTED_MODULE_0__[\"json\"]());\napp.use(express__WEBPACK_IMPORTED_MODULE_0__[\"urlencoded\"]({\n  extended: false\n}));\napp.use(cookieParser());\napp.use('/', indexRouter); // catch 404 and forward to error handler\n\napp.use(function (req, res, next) {\n  next(createError(404));\n}); // error handler\n\napp.use(function (err, req, res) {\n  // set locals, only providing error in development\n  res.locals.message = err.message;\n  res.locals.error = req.app.get('env') === 'development' ? err : {}; // render the error page\n\n  res.status(err.status || 500);\n  res.render('error');\n});\nObject(_config_http_config__WEBPACK_IMPORTED_MODULE_1__[\"createServer\"])(app);\n\n//# sourceURL=webpack:///./app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var http_errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! http-errors */ \"http-errors\");\n/* harmony import */ var http_errors__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(http_errors__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var cookie_parser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cookie-parser */ \"cookie-parser\");\n/* harmony import */ var cookie_parser__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(cookie_parser__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var morgan__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! morgan */ \"morgan\");\n/* harmony import */ var morgan__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(morgan__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! cors */ \"cors\");\n/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _config_http_config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./config/http-config */ \"./config/http-config.js\");\n/* harmony import */ var _routes_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./routes/index */ \"./routes/index.js\");\n/* harmony import */ var _routes_index__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_routes_index__WEBPACK_IMPORTED_MODULE_6__);\n/* harmony import */ var _routes_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./routes/auth */ \"./routes/auth.js\");\n/* harmony import */ var _routes_auth__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_routes_auth__WEBPACK_IMPORTED_MODULE_7__);\n\n\n\n\n\n\n\n\n\n__webpack_require__(/*! dotenv */ \"dotenv\").config();\n\n__webpack_require__(/*! ./config/db */ \"./config/db.js\");\n\nvar app = express__WEBPACK_IMPORTED_MODULE_0__();\napp.use(cors__WEBPACK_IMPORTED_MODULE_4___default()());\napp.use(morgan__WEBPACK_IMPORTED_MODULE_3___default()('dev'));\napp.use(express__WEBPACK_IMPORTED_MODULE_0__[\"json\"]());\napp.use(express__WEBPACK_IMPORTED_MODULE_0__[\"urlencoded\"]({\n  extended: false\n}));\napp.use(cookie_parser__WEBPACK_IMPORTED_MODULE_2___default()());\napp.use('/', _routes_index__WEBPACK_IMPORTED_MODULE_6___default.a);\napp.use('/auth', _routes_auth__WEBPACK_IMPORTED_MODULE_7___default.a); // catch 404 and forward to error handler\n\napp.use(function (req, res, next) {\n  next(http_errors__WEBPACK_IMPORTED_MODULE_1___default()(404));\n}); // error handler\n\napp.use(function (err, req, res) {\n  // set locals, only providing error in development\n  res.locals.message = err.message;\n  res.locals.error = req.app.get('env') === 'development' ? err : {}; // render the error page\n\n  res.status(err.status || 500);\n  res.render('error');\n});\nObject(_config_http_config__WEBPACK_IMPORTED_MODULE_5__[\"createServer\"])(app);\n\n//# sourceURL=webpack:///./app.js?");
 
 /***/ }),
 
@@ -105,7 +105,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var expr
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var mongoose = __webpack_require__(/*! mongoose */ \"mongoose\");\n\nvar DB_URI = process.env.DB_URI || 'mongodb://localhost:27017/rebify';\nmongoose.connect(DB_URI, {\n  useNewUrlParser: true,\n  dbName: 'Upgrade'\n}, function () {}).then(function () {\n  return console.info(\"Correctly connected to the database: \".concat(DB_URI));\n})[\"catch\"](function (error) {\n  return console.error(\"There was an error when trying to connect to the database: \".concat(DB_URI), error);\n});\n\n//# sourceURL=webpack:///./config/db.js?");
+eval("var mongoose = __webpack_require__(/*! mongoose */ \"mongoose\");\n\nvar DB_URI = process.env.DB_URI || 'mongodb://localhost:27017/rebify';\nmongoose.connect(DB_URI, {\n  useNewUrlParser: true,\n  dbName: 'rebify'\n}, function () {}).then(function () {\n  return console.info(\"Correctly connected to the database: \".concat(DB_URI));\n})[\"catch\"](function (error) {\n  return console.error(\"There was an error when trying to connect to the database: \".concat(DB_URI), error);\n});\n\n//# sourceURL=webpack:///./config/db.js?");
 
 /***/ }),
 
@@ -121,6 +121,28 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
+/***/ "./models/User.js":
+/*!************************!*\
+  !*** ./models/User.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var mongoose = __webpack_require__(/*! mongoose */ \"mongoose\");\n\nvar Schema = mongoose.Schema;\nvar UserSchema = new Schema({\n  email: {\n    type: String,\n    required: true // unique: true\n\n  },\n  password: {\n    type: String,\n    required: true\n  }\n}, {\n  timestamps: true,\n  toJSON: function toJSON(doc, ret) {\n    ret.id = doc._id;\n    delete ret._id;\n    delete ret.__v;\n    delete ret.password;\n    return ret;\n  }\n});\nvar User = mongoose.model('User', UserSchema);\nmodule.exports = User;\n\n//# sourceURL=webpack:///./models/User.js?");
+
+/***/ }),
+
+/***/ "./routes/auth.js":
+/*!************************!*\
+  !*** ./routes/auth.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var express = __webpack_require__(/*! express */ \"express\");\n\nvar bcrypt = __webpack_require__(/*! bcryptjs */ \"bcryptjs\");\n\nvar jwt = __webpack_require__(/*! jsonwebtoken */ \"jsonwebtoken\");\n\nvar User = __webpack_require__(/*! ../models/User */ \"./models/User.js\");\n\nvar router = express.Router();\nvar secret = process.env.SECRET;\nrouter.post('/signup', function (req, res) {\n  User.findOne({\n    email: req.body.email\n  }).then(function (user) {\n    if (user) {\n      var error = 'Email Address Exists in Database.';\n      return res.status(400).json(error);\n    }\n\n    var newUser = new User({\n      email: req.body.email,\n      password: req.body.password\n    });\n    bcrypt.genSalt(10, function (err, salt) {\n      if (err) throw err;\n      bcrypt.hash(newUser.password, salt, function (error, hash) {\n        if (error) throw error;\n        newUser.password = hash;\n        newUser.save().then(function (createdUser) {\n          return res.json(createdUser);\n        })[\"catch\"](function (userErr) {\n          return res.status(400).json(userErr);\n        });\n      });\n    });\n  });\n});\nrouter.post('/login', function (req, res) {\n  var email = req.body.email;\n  var password = req.body.password;\n  var errors = {};\n  User.findOne({\n    email: email\n  }).then(function (user) {\n    if (!user) {\n      errors.email = 'No Account Found';\n      return res.status(404).json(errors);\n    }\n\n    bcrypt.compare(password, user.password).then(function (isMatch) {\n      if (isMatch) {\n        var payload = {\n          id: user._id,\n          email: user.email\n        };\n        jwt.sign(payload, secret, {\n          expiresIn: 36000\n        }, function (err, token) {\n          if (err) res.status(500).json({\n            error: 'Error signing token',\n            raw: err\n          });\n          res.json({\n            success: true,\n            token: \"Bearer \".concat(token)\n          });\n        });\n      } else {\n        errors.password = 'Password is incorrect';\n        res.status(400).json(errors);\n      }\n    });\n  });\n});\nmodule.exports = router;\n\n//# sourceURL=webpack:///./routes/auth.js?");
+
+/***/ }),
+
 /***/ "./routes/index.js":
 /*!*************************!*\
   !*** ./routes/index.js ***!
@@ -129,6 +151,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("var express = __webpack_require__(/*! express */ \"express\");\n\nvar router = express.Router();\n/* GET home page. */\n\nrouter.get('/', function (req, res) {\n  res.status(200).json({\n    name: process.env.NAME || 'No name set'\n  });\n});\nmodule.exports = router;\n\n//# sourceURL=webpack:///./routes/index.js?");
+
+/***/ }),
+
+/***/ "bcryptjs":
+/*!***************************!*\
+  !*** external "bcryptjs" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"bcryptjs\");\n\n//# sourceURL=webpack:///external_%22bcryptjs%22?");
 
 /***/ }),
 
@@ -195,6 +228,17 @@ eval("module.exports = require(\"http\");\n\n//# sourceURL=webpack:///external_%
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"http-errors\");\n\n//# sourceURL=webpack:///external_%22http-errors%22?");
+
+/***/ }),
+
+/***/ "jsonwebtoken":
+/*!*******************************!*\
+  !*** external "jsonwebtoken" ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"jsonwebtoken\");\n\n//# sourceURL=webpack:///external_%22jsonwebtoken%22?");
 
 /***/ }),
 

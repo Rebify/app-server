@@ -1,15 +1,16 @@
 import * as express from 'express';
+import createError from 'http-errors';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import cors from 'cors';
+
 import { createServer } from './config/http-config';
+
+import indexRouter from './routes/index';
+import authRouter from './routes/auth';
 
 require('dotenv').config();
 require('./config/db');
-
-const createError = require('http-errors');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const cors = require('cors');
-
-const indexRouter = require('./routes/index');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
