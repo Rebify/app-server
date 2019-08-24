@@ -6,7 +6,7 @@ const User = require('../models/User');
 
 const router = express.Router();
 
-const secret = process.env.SECRET || 'Development secret';
+const secret = process.env.SECRET || 'Dev secret';
 
 router.post('/signup', (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
