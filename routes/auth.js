@@ -1,6 +1,8 @@
-const express = require('express');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+import { isAuthenticated } from '../middleware/authMiddleware';
 
 const User = require('../models/User');
 
@@ -68,4 +70,8 @@ router.post('/login', (req, res) => {
   });
 });
 
-module.exports = router;
+router.get('/sayHello', isAuthenticated, (req, res) => {
+  res.status(200).json({ message: 'hello' });
+});
+
+export default router;
