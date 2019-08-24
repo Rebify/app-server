@@ -12,6 +12,7 @@ router.get('/', isAuthenticated, (req, res) => {
   const { authorization: token } = req.headers;
   const { id } = decodeToken(token);
 
+  // @todo: find the menus related to the user id received and return those
   User.findById(id)
     .populate('menus')
     .then(user => {
