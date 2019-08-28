@@ -12,12 +12,8 @@ router.get('/', isAuthenticated, (req, res) => {
   const { authorization: token } = req.headers;
   const { id } = decodeToken(token);
 
-  // @todo: find the menus related to the user id received and return those
-  User.findById(id)
-    .populate('menus')
-    .then(user => {
-      res.status(200).json({ user });
-    })
+  Menu.find({ userId: id })
+    .then(menus => res.status(200).json({ menus }))
     .catch(err => res.status(400).json(err));
 });
 
@@ -27,9 +23,9 @@ router.post('/createMenu', isAuthenticated, (req, res, next) => {
 
   User.findById(id)
     .then(() => {
-      const { name, dishes } = req.body;
+      const { name } = req.body;
 
-      const newMenu = new Menu({ name, dishes, userId: id });
+      const newMenu = new Menu({ name, userId: id });
 
       newMenu
         .save()
