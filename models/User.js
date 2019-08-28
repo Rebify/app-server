@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
@@ -36,4 +36,4 @@ userSchema.virtual('menus', {
 });
 
 const User = mongoose.model('User', userSchema);
-module.exports = User;
+export default User;

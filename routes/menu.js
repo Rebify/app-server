@@ -3,8 +3,8 @@ import express from 'express';
 import User from '../models/User';
 import Menu from '../models/Menu';
 
-import { isAuthenticated } from '../middleware/authMiddleware';
-import { decodeToken } from '../utils/verifyToken';
+import { isAuthenticated } from '../middleware/isAuthenticated';
+import { decodeToken } from '../utils/jwt';
 
 const router = express.Router();
 
