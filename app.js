@@ -13,7 +13,7 @@ require('./config/db');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: ['https://localhost:4200', 'http://localhost:4200'], credentials: true }));
 
 app.use(logger('dev'));
 

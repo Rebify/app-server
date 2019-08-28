@@ -58,10 +58,7 @@ router.post('/login', (req, res) => {
               return res.status(500).json({ error: 'Error signing token', raw: err });
             }
 
-            return res
-              .status(200)
-              .cookie('rebify_token', token, { maxAge: 86400 })
-              .json({ success: true });
+            return res.status(200).json({ success: true, token });
           };
 
           const payload = { id: user._id };
