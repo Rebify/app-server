@@ -6,15 +6,14 @@ import cors from 'cors';
 
 import { createServer } from './config/http-config';
 
-import indexRouter from './routes/index';
-import authRouter from './routes/auth';
+import routes from './routes';
 
 require('dotenv').config();
 require('./config/db');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: ['https://localhost:4200', 'http://localhost:4200'], credentials: true }));
 
 app.use(logger('dev'));
 
@@ -22,8 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
-app.use('/auth', authRouter);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

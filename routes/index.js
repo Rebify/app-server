@@ -1,12 +1,15 @@
-const express = require('express');
+import express from 'express';
+
+import authRoutes from './auth';
+import menuRoutes from './menu';
 
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.status(200).json({
-    name: process.env.NAME || 'No name set',
-  });
+router.get('/ping', (req, res) => {
+  res.status(200).json({});
 });
 
-module.exports = router;
+router.use('/auth', authRoutes);
+router.use('/menu', menuRoutes);
+
+export default router;
